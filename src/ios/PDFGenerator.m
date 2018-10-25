@@ -147,13 +147,13 @@
         self.htmlPdfKit = [BNHtmlPdfKit saveHTMLAsPdf:data
                                              pageSize:pageSize
                                           isLandscape:landscape
-										      baseUrl:base
+										      baseUrl:absoluteUrl
                                               success:[self GetPDFHandler:command setOptions:option]
                                               failure:[self GetErrorHandler:command]];
     
     
        
-          NSLog(@"url--> %@", [[base absoluteString] stringByDeletingLastPathComponent]);
+          NSLog(@"url--> %@", [[absoluteUrl absoluteString] stringByDeletingLastPathComponent]);
     }
 }
 
