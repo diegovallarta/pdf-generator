@@ -135,7 +135,14 @@
                                              failure:[self GetErrorHandler:command]];
     
     if (data != NULL){
-        NSURL *base =  [[NSURL alloc] initWithString:[[self.webViewEngine.URL absoluteString] stringByDeletingLastPathComponent]];
+        //NSURL *base =  [[NSURL alloc] initWithString:[[self.webViewEngine.URL absoluteString] stringByDeletingLastPathComponent]];
+        
+#ifdef __CORDOVA_4_0_0
+        NSURL* baseUrl = [self.webViewEngine URL];
+#else
+        NSURL* baseUrl = [self.webView.request URL];
+#endif
+        NSURL* absoluteUrl = [[NSURL URLWithString:url relativeToURL:baseUrl] absoluteURL];
         
         self.htmlPdfKit = [BNHtmlPdfKit saveHTMLAsPdf:data
                                              pageSize:pageSize
